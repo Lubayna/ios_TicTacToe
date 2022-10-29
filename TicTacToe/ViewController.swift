@@ -14,15 +14,12 @@ class ViewController: UIViewController
         case Cross
     }
     @IBOutlet weak var turnLabel: UILabel!
-    
     @IBOutlet weak var a1: UIButton!
     @IBOutlet weak var a2: UIButton!
     @IBOutlet weak var a3: UIButton!
-    
     @IBOutlet weak var b1: UIButton!
     @IBOutlet weak var b2: UIButton!
     @IBOutlet weak var b3: UIButton!
-    
     @IBOutlet weak var c1: UIButton!
     @IBOutlet weak var c2: UIButton!
     @IBOutlet weak var c3: UIButton!
@@ -58,25 +55,25 @@ class ViewController: UIViewController
     
     @IBAction func boardTapAction(_ sender: UIButton)
     {
-        addToBoard(sender)
-        
-//        if checkForVictory(CROSS)
-//        {
-//            crossesScore += 1
-//            resultAlert(title: "Crosses Win!")
-//        }
-//
-//        if checkForVictory(NOUGHT)
-//        {
-//            noughtsScore += 1
-//            resultAlert(title: "Noughts Win!")
-//        }
-//
-        
-        if(fullBoard())
-        {
-            resultAlert(title: "Draw")
-        }
+            addToBoard(sender)
+            
+            if checkForVictory(CROSS)
+            {
+                crossesScore += 1
+                resultAlert(title: "Crosses Win!")
+            }
+
+            if checkForVictory(NOUGHT)
+            {
+                noughtsScore += 1
+                resultAlert(title: "Noughts Win!")
+            }
+
+            
+            if(fullBoard())
+            {
+                resultAlert(title: "Draw")
+            }
     }
     
     func checkForVictory(_ s :String) -> Bool
@@ -100,7 +97,7 @@ class ViewController: UIViewController
         {
             return true
         }
-        if thisSymbol(a2, s) && thisSymbol(b2, s) && thisSymbol(b3, s)
+        if thisSymbol(a2, s) && thisSymbol(b2, s) && thisSymbol(b2, s)
         {
             return true
         }
@@ -132,7 +129,7 @@ class ViewController: UIViewController
     func resultAlert(title: String)
     {
         let message = "\nNoughts " + String(noughtsScore) + "\n\nCrosses " + String(crossesScore)
-        let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: {(_) in
             self.resetBoard()
         }))
@@ -142,16 +139,17 @@ class ViewController: UIViewController
     
     func resetBoard()
     {
-        for button in board{
+        for button in board
+        {
             button.setTitle(nil, for: .normal)
             button.isEnabled = true
         }
-        if(firstTurn == Turn.Nought)
+        if firstTurn == Turn.Nought
         {
             firstTurn = Turn.Cross
             turnLabel.text = CROSS
         }
-        else if(firstTurn == Turn.Cross)
+        else if firstTurn == Turn.Cross
         {
             firstTurn = Turn.Nought
             turnLabel.text = NOUGHT
@@ -188,10 +186,10 @@ class ViewController: UIViewController
                 currentTurn = Turn.Nought
                 turnLabel.text = NOUGHT
             }
+            sender.isEnabled = false
         }
     }
     
 }
     
-
 
